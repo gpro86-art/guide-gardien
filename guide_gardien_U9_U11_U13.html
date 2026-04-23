@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide Gardien U9/U11/U13</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; font-size: 15px; }
+  .header { background: #185FA5; color: white; padding: 16px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .header h1 { font-size: 17px; font-weight: 600; }
+  .header p { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+  .tabs { display: flex; overflow-x: auto; background: white; border-bottom: 1px solid #e0e0d8; gap: 0; -webkit-overflow-scrolling: touch; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; padding: 12px 16px; font-size: 13px; font-weight: 500; color: #666; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
+  .tab.active { color: #185FA5; border-bottom-color: #185FA5; }
+  .section { display: none; padding: 16px; max-width: 700px; margin: 0 auto; }
+  .section.active { display: block; }
+  .card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .card-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-teal { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-coral { background: #fee2e2; color: #991b1b; }
+  .badge-green { background: #dcfce7; color: #14532d; }
+  .card p, .card li { font-size: 14px; color: #444; line-height: 1.65; }
+  .card ul { padding-left: 18px; }
+  .card li { margin-bottom: 5px; }
+  .tl-row { display: grid; grid-template-columns: 88px 1fr; gap: 10px; margin-bottom: 8px; }
+  .tl-time { font-size: 11px; font-weight: 600; color: #888; text-align: right; padding-top: 8px; }
+  .tl-block { border-radius: 10px; padding: 10px 12px; }
+  .tl-block .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+  .tl-block p { font-size: 13px; line-height: 1.55; }
+  .bg-blue { background: #dbeafe; } .bg-blue .lbl { color: #1d4ed8; } .bg-blue p { color: #1e40af; }
+  .bg-teal { background: #d1fae5; } .bg-teal .lbl { color: #065f46; } .bg-teal p { color: #047857; }
+  .bg-amber { background: #fef3c7; } .bg-amber .lbl { color: #92400e; } .bg-amber p { color: #b45309; }
+  .bg-coral { background: #fee2e2; } .bg-coral .lbl { color: #991b1b; } .bg-coral p { color: #b91c1c; }
+  .bg-green { background: #dcfce7; } .bg-green .lbl { color: #14532d; } .bg-green p { color: #15803d; }
+  .exo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+  .exo-card { background: #f8f8f4; border-radius: 10px; padding: 10px 12px; border: 1px solid #e8e8e0; }
+  .exo-card .etitle { font-size: 13px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+  .exo-card p { font-size: 12px; color: #555; line-height: 1.5; }
+  .principes { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
+  .principe-item { background: #f0f6ff; border-radius: 10px; padding: 10px 12px; border-left: 3px solid #185FA5; }
+  .principe-item .pi-title { font-size: 13px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+  .principe-item p { font-size: 12px; color: #444; line-height: 1.5; }
+  .mat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
+  .mat-item { background: #f8f8f4; border-radius: 10px; padding: 10px 12px; text-align: center; border: 1px solid #e8e8e0; }
+  .mat-icon { font-size: 22px; margin-bottom: 4px; }
+  .mat-item p { font-size: 12px; color: #555; }
+  .warn-box { background: #fef3c7; border-radius: 10px; padding: 10px 14px; border-left: 3px solid #d97706; margin-top: 12px; }
+  .warn-box p { font-size: 13px; color: #92400e; line-height: 1.5; }
+  .info-box { background: #dbeafe; border-radius: 10px; padding: 10px 14px; border-left: 3px solid #185FA5; margin-top: 12px; }
+  .info-box p { font-size: 13px; color: #1e40af; line-height: 1.5; }
+  .divider { border: none; border-top: 1px solid #e8e8e0; margin: 14px 0; }
+  h3 { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; margin-top: 14px; }
+  .sources { font-size: 11px; color: #888; margin-top: 10px; font-style: italic; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚽ Guide Gardien de But</h1>
+  <p>U9 / U11 / U13 · Séances de 60 min · 1×/semaine</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('principes', this)">Principes</button>
+  <button class="tab" onclick="show('u9', this)">U9 (6-8 ans)</button>
+  <button class="tab" onclick="show('u11', this)">U11 (9-10 ans)</button>
+  <button class="tab" onclick="show('u13', this)">U13 (11-12 ans)</button>
+  <button class="tab" onclick="show('exercices', this)">Exercices</button>
+  <button class="tab" onclick="show('materiel', this)">Matériel</button>
+</div>
+
+<!-- PRINCIPES -->
+<div id="principes" class="section active">
+  <div class="card">
+    <div class="card-title">Philosophie <span class="badge badge-blue">Fondamental</span></div>
+    <div class="principes">
+      <div class="principe-item"><div class="pi-title">Plaisir avant tout</div><p>Les exercices doivent être ludiques, variés, avec beaucoup de touches de balle. Le plaisir est la clé de la progression.</p></div>
+      <div class="principe-item"><div class="pi-title">Répétition du geste</div><p>L'objectif est d'imprimer le mouvement mentalement. Privilégier la répétition à la longueur des exercices.</p></div>
+      <div class="principe-item"><div class="pi-title">Progressivité</div><p>Du simple au complexe : geste isolé → exercice avec contrainte → situation de jeu réelle.</p></div>
+      <div class="principe-item"><div class="pi-title">Situation de jeu finale</div><p>Toujours terminer par un jeu libre. Les gestes appris doivent être testés sans consigne, comme en match.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Structure universelle — 60 min</div>
+    <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-block bg-blue"><div class="lbl">Échauffement général</div><p>Footing léger (4-6 largeurs), mobilisation articulaire, réveil musculaire des cuisses, adducteurs, chevilles, bras. Intensité progressive.</p></div></div>
+    <div class="tl-row"><div class="tl-time">10 – 20 min</div><div class="tl-block bg-teal"><div class="lbl">Échauffement spécifique</div><p>Premier contact avec le ballon : prises de balle faciles, coordination, déplacements. Exercices de coordination en début de séance (gardien non fatigué).</p></div></div>
+    <div class="tl-row"><div class="tl-time">20 – 45 min</div><div class="tl-block bg-amber"><div class="lbl">Partie principale — thème du jour</div><p>1 ou 2 thèmes spécifiques en progression : analytique → situatif → jeu. Exercices de 3-5 min avec pauses actives. Beaucoup de répétitions.</p></div></div>
+    <div class="tl-row"><div class="tl-time">45 – 57 min</div><div class="tl-block bg-coral"><div class="lbl">Jeu de fin de séance</div><p>Match 1v1 gardien contre gardien (4 min), ou situation de jeu libre sur but. Toutes les techniques autorisées : pied, main, volée.</p></div></div>
+    <div class="tl-row"><div class="tl-time">57 – 60 min</div><div class="tl-block bg-green"><div class="lbl">Retour au calme</div><p>Étirements courts (15-30 sec par position). Bilan verbal positif avec les gardiens.</p></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Les 5 piliers techniques</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Prise de balle</div><p>Fondamental. S'entraîner parfois à mains nues pour développer la sensibilité des doigts et poignets.</p></div>
+      <div class="exo-card"><div class="etitle">Déplacements & appuis</div><p>Condition de toutes les actions. Vitesse de réaction, reprise d'appuis, pas chassés latéraux.</p></div>
+      <div class="exo-card"><div class="etitle">Plongeon</div><p>Toujours vers l'avant. Impulsion, détente, réception doivent être coordonnées.</p></div>
+      <div class="exo-card"><div class="etitle">Relances</div><p>Au pied (roulée, volée) et à la main (enroulé, jet tendu). Précision selon la distance.</p></div>
+      <div class="exo-card"><div class="etitle">Placement & réduction d'angle</div><p>Maîtriser l'espace devant la cage. Sortir au bon moment. Lecture du jeu et anticipation.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- U9 -->
+<div id="u9" class="section">
+  <div class="card">
+    <div class="card-title">U9 — 6 à 8 ans <span class="badge badge-teal">Découverte & motricité</span></div>
+    <div class="info-box"><p><strong>Philosophie :</strong> À cet âge, la spécialisation n'est pas recommandée. Tous les enfants tournent au poste. Le travail est axé sur la motricité globale, la coordination et le plaisir de toucher le ballon.</p></div>
+    <hr class="divider">
+    <h3>Objectifs prioritaires</h3>
+    <ul>
+      <li>Développer la coordination générale et la motricité fine</li>
+      <li>Prendre du plaisir en touchant le ballon (mains et pieds)</li>
+      <li>Découvrir la position : posture, appuis, regard</li>
+      <li>Apprendre à se déplacer latéralement et réagir à un signal</li>
+      <li>Travailler les réflexes de base (attraper, détourner)</li>
+    </ul>
+    <hr class="divider">
+    <h3>Structure séance type U9 — 60 min</h3>
+    <div class="tl-row"><div class="tl-time">0 – 8 min</div><div class="tl-block bg-blue"><div class="lbl">Échauffement ludique</div><p>Jeu du loup, parcours d'agilité avec cerceaux et plots, départs sur signal visuel. Réactivité et vitesse de départ.</p></div></div>
+    <div class="tl-row"><div class="tl-time">8 – 18 min</div><div class="tl-block bg-teal"><div class="lbl">Contact ballon varié</div><p>Jonglage libre, lancer/attraper avec 2 ballons face à face, lancers à droite et à gauche entre 2 cônes (2-3 m). L'enfant attrape et enroule le ballon contre sa poitrine.</p></div></div>
+    <div class="tl-row"><div class="tl-time">18 – 40 min</div><div class="tl-block bg-amber"><div class="lbl">Ateliers techniques simples</div><p>2-3 ateliers de 7 min en rotation. Distances réduites (2-3 m). Buts de petite taille. Voir exercices ci-dessous.</p></div></div>
+    <div class="tl-row"><div class="tl-time">40 – 55 min</div><div class="tl-block bg-coral"><div class="lbl">Petit jeu compétitif</div><p>Jeu de l'anneau : lancer dans des cerceaux accrochés au but. Concours de réflexes. Concours de détente horizontale.</p></div></div>
+    <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-block bg-green"><div class="lbl">Retour au calme</div><p>Étirements simples en imitant l'entraîneur. Bilan : "qu'est-ce que j'ai appris aujourd'hui ?"</p></div></div>
+    <hr class="divider">
+    <h3>Exercices recommandés U9</h3>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Prise de balle de base</div><p>2 cônes à 3 m. Lance à droite, à gauche, au niveau du torse. L'enfant attrape et enroule contre la poitrine.</p></div>
+      <div class="exo-card"><div class="etitle">Détente horizontale</div><p>2 cônes devant la cage. Faire rouler le ballon alternativement gauche/droite. L'enfant plonge pour détourner avec la main.</p></div>
+      <div class="exo-card"><div class="etitle">Jeu des couleurs</div><p>4 cônes de couleurs différentes. L'entraîneur crie une couleur, le gardien court toucher le cône. Réactivité et orientation.</p></div>
+      <div class="exo-card"><div class="etitle">Dégagement volée</div><p>2 piquets à 3 m. L'entraîneur shoote vers le gardien. Celui-ci capte et dégage en volée le plus loin possible.</p></div>
+    </div>
+    <div class="warn-box"><p>⚠️ Pas de gardien fixe à cet âge ! Tous les enfants tournent au poste. Éviter les gants avant 8-9 ans pour développer la sensibilité des mains.</p></div>
+  </div>
+</div>
+
+<!-- U11 -->
+<div id="u11" class="section">
+  <div class="card">
+    <div class="card-title">U11 — 9 à 10 ans <span class="badge badge-amber">Technique & coordination</span></div>
+    <div class="info-box"><p><strong>Philosophie :</strong> L'âge d'or de l'apprentissage débute. Les enfants peuvent commencer à se spécialiser progressivement. Les contenus techniques et coordinatifs prennent de l'importance. Les exercices restent ludiques mais plus structurés.</p></div>
+    <hr class="divider">
+    <h3>Objectifs prioritaires</h3>
+    <ul>
+      <li>Maîtriser la posture de base et les déplacements fondamentaux</li>
+      <li>Automatiser la prise de balle (mains propres, corps derrière)</li>
+      <li>Initiation au plongeon latéral au sol</li>
+      <li>Travailler les sorties simples dans les pieds</li>
+      <li>Introduire la notion de réduction d'angle</li>
+      <li>Premières relances (roulée au sol, jet à la main)</li>
+    </ul>
+    <hr class="divider">
+    <h3>Structure séance type U11 — 60 min</h3>
+    <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-block bg-blue"><div class="lbl">Échauffement coordinatif</div><p>Footing + mobilisation. Slalom avec sidesteps entre 4 plots. Coordination pieds + mains. Intensité progressive.</p></div></div>
+    <div class="tl-row"><div class="tl-time">10 – 20 min</div><div class="tl-block bg-teal"><div class="lbl">Échauffement spécifique</div><p>2 gardiens face à face : échange de balle en enroulant les épaules alternativement. Prises de balle à distances croissantes (3 m → 8 m). Jeu de balle rapide à la main.</p></div></div>
+    <div class="tl-row"><div class="tl-time">20 – 35 min</div><div class="tl-block bg-amber"><div class="lbl">Travail analytique — thème 1</div><p>Ex : plongeon au sol. Lance à droite/gauche, le gardien plonge, se relève, relance. 3-5 arrêts par gardien puis rotation.</p></div></div>
+    <div class="tl-row"><div class="tl-time">35 – 50 min</div><div class="tl-block bg-amber"><div class="lbl">Travail situatif — thème 2</div><p>Ex : prise de balle + relance. Frappe depuis 8-10 m, le gardien capte et relance vers une cible. Intégrer un déplacement avant la frappe.</p></div></div>
+    <div class="tl-row"><div class="tl-time">50 – 57 min</div><div class="tl-block bg-coral"><div class="lbl">Jeu 1v1 gardiens</div><p>Match gardien contre gardien sur 2 petits buts. 4 min. Toutes les techniques autorisées. Développe la compétitivité et la confiance.</p></div></div>
+    <div class="tl-row"><div class="tl-time">57 – 60 min</div><div class="tl-block bg-green"><div class="lbl">Retour au calme</div><p>Étirements guidés, 15-30 sec par position. Feedback positif sur les progrès observés.</p></div></div>
+    <hr class="divider">
+    <h3>Exercices recommandés U11</h3>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Slalom + arrêt</div><p>4 plots en slalom, sidestep. À la sortie du dernier plot, l'entraîneur tire au sol. Le gardien arrête. Appuis + réflexe.</p></div>
+      <div class="exo-card"><div class="etitle">2 gardiens — 1 tireur</div><p>2 buts face à face. Un tireur au milieu envoie plat ou en aérien. Chaque gardien relance dans l'autre but.</p></div>
+      <div class="exo-card"><div class="etitle">Plongeon progressif</div><p>D'abord l'entraîneur annonce le côté, puis ne l'annonce pas. 2 passages par côté. Relève rapide après chaque plongeon.</p></div>
+      <div class="exo-card"><div class="etitle">Sortie dans les pieds</div><p>2-3 joueurs avancent en footing. Le gardien sort alternativement à droite et à gauche attraper le ballon.</p></div>
+      <div class="exo-card"><div class="etitle">Réduction d'angle</div><p>L'attaquant dribble depuis le bord de surface. Le gardien avance pour réduire l'angle sans sortir trop tôt.</p></div>
+      <div class="exo-card"><div class="etitle">Passe à 10 à la main</div><p>4+ gardiens : passe à la main, interdite de récupérer pour l'équipe adverse. Vision, appuis, relance.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- U13 -->
+<div id="u13" class="section">
+  <div class="card">
+    <div class="card-title">U13 — 11 à 12 ans <span class="badge badge-coral">Technique & tactique</span></div>
+    <div class="info-box"><p><strong>Philosophie :</strong> "L'âge d'or de l'apprentissage" à son apogée. Les U13 peuvent absorber des contenus techniques ET tactiques plus complexes. Léger renforcement musculaire adapté possible. Spécialisation pleinement justifiée.</p></div>
+    <hr class="divider">
+    <h3>Objectifs prioritaires</h3>
+    <ul>
+      <li>Consolider tous les fondamentaux techniques</li>
+      <li>Développer le jeu au pied (passe courte, dégagement)</li>
+      <li>Travail tactique : placement, réduction d'angle, jeu à la main</li>
+      <li>Introduire les ballons aériens (centres, corners)</li>
+      <li>Travailler sous pression : réactivité, décisions rapides</li>
+      <li>Premiers exercices de gainage adaptés à l'âge</li>
+    </ul>
+    <hr class="divider">
+    <h3>Structure séance type U13 — 60 min</h3>
+    <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-block bg-blue"><div class="lbl">Échauffement complet</div><p>Footing + mobilisation + gainage court (4-6 exercices, 15-30 sec chacun). Prépare aux exigences physiques de la partie principale.</p></div></div>
+    <div class="tl-row"><div class="tl-time">10 – 20 min</div><div class="tl-block bg-teal"><div class="lbl">Échauffement spécifique</div><p>Exercice de déplacement coordinatif + passes + prises de balle. Intégrer des prises d'info (couleurs, signaux). Ex : slalom → prise de balle → relance → retour.</p></div></div>
+    <div class="tl-row"><div class="tl-time">20 – 38 min</div><div class="tl-block bg-amber"><div class="lbl">Travail analytique — thème 1</div><p>5 tirs par gardien avec variation (sol, mi-hauteur, aérien). Corriger la technique de base : position des pieds, du corps, des mains.</p></div></div>
+    <div class="tl-row"><div class="tl-time">38 – 50 min</div><div class="tl-block bg-amber"><div class="lbl">Travail situatif — thème 2</div><p>Situation de jeu réelle (2v1, corner, 1v1). L'entraîneur se place derrière le gardien pour corriger sans perturber l'exercice.</p></div></div>
+    <div class="tl-row"><div class="tl-time">50 – 57 min</div><div class="tl-block bg-coral"><div class="lbl">Jeu compétitif</div><p>1v1 gardiens sur but, ou mini-match 3v2 avec gardien. Décisions sous pression réelle.</p></div></div>
+    <div class="tl-row"><div class="tl-time">57 – 60 min</div><div class="tl-block bg-green"><div class="lbl">Retour au calme & bilan</div><p>Étirements actifs. Analyse verbale : points forts, axes de travail pour la prochaine séance.</p></div></div>
+    <hr class="divider">
+    <h3>Exercices recommandés U13</h3>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Circuit combiné</div><p>Slalom → plongeon → relève → frappe haute → aérien. Chaîne de mouvements enchaînés. 3-5 passages. Explosivité et récupération.</p></div>
+      <div class="exo-card"><div class="etitle">Frappe à 10-12 m</div><p>Distances proches d'un vrai match. Variation : ras du sol, mi-hauteur, aérien. Sans annoncer le type de frappe.</p></div>
+      <div class="exo-card"><div class="etitle">Ballons aériens</div><p>Centres depuis les côtés, corners. Le gardien sort en annonçant "c'est pour moi". Timing, impulsion, sécurisation.</p></div>
+      <div class="exo-card"><div class="etitle">Pression réflexes</div><p>3 ballons lancés simultanément dans la surface. Le gardien bloque le plus proche. Décision rapide et réactivité.</p></div>
+      <div class="exo-card"><div class="etitle">Jeu au pied</div><p>Passes en retour depuis différents angles. Recevoir, contrôler, renvoyer proprement. Les deux pieds.</p></div>
+      <div class="exo-card"><div class="etitle">1v1 dans les pieds</div><p>L'attaquant arrive balle au pied depuis 12 m. Le gardien décide : sortir ou attendre. Plusieurs scénarios (angle fermé, ouvert).</p></div>
+    </div>
+    <div class="warn-box"><p>⚠️ À U13, le gainage et le renforcement léger sont judicieux mais toujours adaptés à l'âge. Éviter les charges lourdes ou la musculation classique.</p></div>
+  </div>
+</div>
+
+<!-- EXERCICES -->
+<div id="exercices" class="section">
+  <div class="card">
+    <div class="card-title">Banque d'exercices — Échauffements</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Échange d'épaules</div><p>2 gardiens face à face s'échangent le ballon en enroulant les épaules alternativement droite/gauche. Échauffe les bras, active les appuis.</p></div>
+      <div class="exo-card"><div class="etitle">Prise de balle progressive</div><p>Débuter à 2 m, augmenter la distance. Varier la hauteur : sol → mi-hauteur → aérien. Corps toujours derrière le ballon.</p></div>
+      <div class="exo-card"><div class="etitle">Jonglage + déplacement</div><p>Jongler en se déplaçant (pas chassés, pas croisés). Développe coordination et maîtrise du ballon en mouvement.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Plongeons</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Plongeon annoncé</div><p>L'entraîneur indique le côté avant de lancer. Le gardien prépare son appui, plonge, relève. Phase d'apprentissage du geste pur.</p></div>
+      <div class="exo-card"><div class="etitle">Plongeon non annoncé</div><p>L'entraîneur frappe librement à droite ou à gauche. Réaction pure. Ne pas chercher à bloquer deux ballons à la fois.</p></div>
+      <div class="exo-card"><div class="etitle">Relève rapide</div><p>Après chaque plongeon, se relever le plus vite possible avant le prochain ballon. Travaille la réactivité post-arrêt.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Déplacements & appuis</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Slalom en sidesteps</div><p>4-6 plots. Pas chassés entre les plots sans croiser les pieds. Variation : jouer une balle à l'arrivée.</p></div>
+      <div class="exo-card"><div class="etitle">Appuis sur signal</div><p>G1 regarde G2. G2 pose le pied sur un cône de couleur. G1 recule vers sa ligne de but puis effectue le mouvement correspondant.</p></div>
+      <div class="exo-card"><div class="etitle">Triangle de cônes</div><p>3 cônes en triangle à 5 m. L'entraîneur appelle A, B ou C. Le gardien court vers le cône appelé. Orientation et réactivité.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Relances</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">Relance roulée au sol</div><p>Cible à 10-15 m. Le gardien relance en roulé sous main. Travailler la précision, pas la puissance. À partir de U11.</p></div>
+      <div class="exo-card"><div class="etitle">Jet tendu (long)</div><p>Pour les longues distances. Mouvement de fronde, bras tendu. Travailler la précision vers une cible. À partir de U11.</p></div>
+      <div class="exo-card"><div class="etitle">Passe courte au pied</div><p>Défenseur à 5-8 m. Passe en retrait. Le gardien contrôle et redonne proprement. Les deux pieds dès U11.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Jeux de fin de séance</div>
+    <div class="exo-grid">
+      <div class="exo-card"><div class="etitle">1v1 gardiens</div><p>Match 4 min. Chaque gardien tente de marquer dans le but adverse. Toutes les techniques autorisées. Développe confiance et compétitivité.</p></div>
+      <div class="exo-card"><div class="etitle">Jeu de l'anneau (U9)</div><p>Des cerceaux de couleurs sont accrochés au but. Les enfants lancent et essaient de passer dans le cerceau indiqué. Compétition ludique.</p></div>
+      <div class="exo-card"><div class="etitle">Mini-match avec gardien</div><p>3v2 ou 2v1 avec gardien actif. Le gardien prend des décisions sous pression réelle de match. Parfait pour U13.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- MATÉRIEL -->
+<div id="materiel" class="section">
+  <div class="card">
+    <div class="card-title">Matériel recommandé</div>
+    <div class="mat-grid">
+      <div class="mat-item"><div class="mat-icon">⚽</div><p>Ballons (taille 3 pour U9, taille 4 pour U11/U13)</p></div>
+      <div class="mat-item"><div class="mat-icon">🔴</div><p>Cônes de 4 couleurs différentes minimum</p></div>
+      <div class="mat-item"><div class="mat-icon">📍</div><p>Plots et piquets (6-10 minimum)</p></div>
+      <div class="mat-item"><div class="mat-icon">⭕</div><p>Cerceaux (coordination et cibles U9)</p></div>
+      <div class="mat-item"><div class="mat-icon">🥅</div><p>Petit but ou plots simulant les poteaux</p></div>
+      <div class="mat-item"><div class="mat-icon">📋</div><p>Fiche de séance (plastifiée si possible)</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Conseils pédagogiques essentiels</div>
+    <div class="principes">
+      <div class="principe-item"><div class="pi-title">Thème unique par séance</div><p>1-2 thèmes max. La répétition du même mouvement dans des situations variées est plus efficace que la diversité excessive.</p></div>
+      <div class="principe-item"><div class="pi-title">Se placer derrière</div><p>Se mettre derrière le gardien pour corriger : on voit ce qu'il voit, sans perturber l'exercice. Jamais en face pendant l'action.</p></div>
+      <div class="principe-item"><div class="pi-title">Exercices courts et intenses</div><p>3-5 passages par gardien, puis rotation ou pause. Éviter les exercices trop longs qui diluent la qualité du geste.</p></div>
+      <div class="principe-item"><div class="pi-title">Bilan positif</div><p>Terminer par un feedback positif ciblé. Nommer ce qui a progressé. L'enfant repart motivé pour la prochaine séance.</p></div>
+      <div class="principe-item"><div class="pi-title">Pas de gardien fixe (U9)</div><p>En U9, faire tourner tous les joueurs. La spécialisation trop précoce nuit au développement moteur global et à la motivation.</p></div>
+      <div class="principe-item"><div class="pi-title">Gants seulement à partir de U9-U10</div><p>Avant cet âge, s'entraîner à mains nues permet de mieux développer la sensibilité tactile du ballon.</p></div>
+    </div>
+    <div class="sources">Sources : Manuel de l'entraîneur de gardien ASF/SFV (Suisse) · Fussball.de / DFB (Allemagne) · Soccerdrills.de · Entrainementdefoot.fr · Owayo.fr · Soccer-estduquebec.org · Uhlsport Blog</div>
+  </div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo(0, 60);
+}
+</script>
+</body>
+</html>
